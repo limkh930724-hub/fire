@@ -10,8 +10,8 @@
   - JSON-LD URL
   - `sitemap.xml`
   - `robots.txt`
-- `contact@example.com`
-  - `contact.html`의 운영자 문의 이메일
+- `limkh930724@gmail.com`
+  - `contact.html`의 운영자 문의 이메일로 반영되어 있습니다.
 - Google AdSense 승인 후 발급되는 게시자 ID
   - 승인 또는 안내를 받은 뒤 `ads.txt`를 추가하세요.
   - 예: `google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0`
