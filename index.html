@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>복리 계산기 | 투자 계산 도구</title>
+  <meta name="description" content="초기 투자금, 월 적립금, 예상 연 수익률, 투자 기간을 입력해 최종 예상 자산과 연도별 자산 증가 표를 계산합니다.">
+  <link rel="canonical" href="https://example.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="복리 계산기 | 투자 계산 도구">
+  <meta property="og:description" content="사용자가 직접 입력한 예상 수익률로 복리 효과를 단순 계산하는 투자 보조 도구입니다.">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:site_name" content="투자 계산 도구">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="/assets/js/calculator.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"투자 계산 도구","url":"https://example.com/","description":"사용자가 직접 입력한 가정으로 복리와 FIRE 은퇴 목표를 계산하는 정적 웹사이트입니다."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"복리 계산기","url":"https://example.com/","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"초기 투자금, 월 적립금, 예상 연 수익률, 투자 기간을 입력해 장기 자산 형성 예시를 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"복리 계산기","item":"https://example.com/"}]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="/" aria-current="page"><span class="brand-mark" aria-hidden="true">₩</span><span>투자 계산 도구</span></a>
+      <nav class="nav-links" aria-label="주요 메뉴">
+        <a class="nav-primary" href="/" aria-current="page">복리 계산기</a><a class="nav-primary" href="/fire-calculator">FIRE 계산기</a><details class="nav-more"><summary>더보기</summary><div class="nav-menu"><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><a href="/contact">Contact</a></div></details>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="page-title visual-title">
+      <div class="container page-title-inner">
+        <div>
+          <h1>복리 계산기</h1>
+          <p class="lead">월 적립식 투자 가정을 입력해 장기 자산 변화와 예상 수익금을 계산합니다. 실제 시장 데이터는 사용하지 않습니다.</p>
+          <a class="button secondary title-action" href="/fire-calculator">FIRE 계산기로 이동</a>
+        </div>
+        <img class="page-visual" src="/assets/img/compound-growth.svg" alt="사용자 입력값 기반 복리 성장 그래프 예시">
+      </div>
+    </section>
+    <section class="section">
+      <div class="container tool-grid">
+        <section class="tool-panel" aria-labelledby="compound-input-title">
+          <h2 id="compound-input-title">입력값</h2>
+          <form id="compoundForm" class="calculator-form">
+            <div class="field"><label for="initialAmount">초기 투자금</label><input id="initialAmount" class="money-input" type="text" value="10,000,000" inputmode="numeric" autocomplete="off" data-korean-target="initialAmountText"><small>처음 투자되어 있다고 가정할 금액입니다.</small><output class="amount-help" id="initialAmountText" for="initialAmount">1,000만원</output></div>
+            <div class="field"><label for="monthlyContribution">월 적립금</label><input id="monthlyContribution" class="money-input" type="text" value="500,000" inputmode="numeric" autocomplete="off" data-korean-target="monthlyContributionText"><small>매월 말 추가로 투자한다고 가정합니다.</small><output class="amount-help" id="monthlyContributionText" for="monthlyContribution">50만원</output></div>
+            <div class="field"><label for="annualReturn">예상 연 수익률(%)</label><input id="annualReturn" type="number" min="-99" max="100" step="0.1" value="5" inputmode="decimal"><small>사용자가 직접 입력하는 가정값이며 약속된 수익률이 아닙니다.</small></div>
+            <div class="field"><label for="investmentYears">투자 기간(년)</label><select id="investmentYears"><option value="1">1년</option><option value="3">3년</option><option value="5">5년</option><option value="10">10년</option><option value="15">15년</option><option value="20" selected>20년</option><option value="25">25년</option><option value="30">30년</option><option value="35">35년</option><option value="40">40년</option></select></div>
+            <button class="button" type="submit">계산하기</button>
+          </form>
+        </section>
+        <section class="tool-panel result-panel" id="compoundResultPanel" aria-labelledby="compound-result-title" aria-live="polite">
+          <div class="panel-heading">
+            <div>
+              <h2 id="compound-result-title">예상 성장 그래프</h2>
+              <p id="compoundAssumption">입력값을 확인한 뒤 계산하기를 누르면 결과가 업데이트됩니다.</p>
+            </div>
+            <button class="tip-button" type="button" data-modal-target="compoundTip">Tip</button>
+          </div>
+          <div class="result-summary">
+            <div class="metric"><span>최종 예상 자산</span><strong id="compoundFinal">-</strong></div>
+            <div class="metric"><span>총 투자 원금</span><strong id="compoundPrincipal">-</strong></div>
+            <div class="metric"><span>예상 수익금</span><strong id="compoundProfit">-</strong></div>
+          </div>
+          <div class="notice"><strong>주의:</strong> 예상 결과이며 실제 수익률과 다를 수 있습니다. 수수료, 세금, 물가, 손실 가능성은 별도로 검토해야 합니다.</div>
+          <div class="chart-wrap"><canvas id="compoundChart" aria-label="연도별 예상 자산과 누적 원금 그래프" role="img"></canvas></div>
+        </section>
+      </div>
+      <div class="container">
+        <div class="table-wrap result-panel" id="compoundTable" aria-label="연도별 자산 증가 표" hidden></div>
+        <aside class="ad-slot result-panel" id="compoundGuide" aria-label="계산 안내" hidden>계산 결과는 입력값에 따른 참고용 예시입니다. 실제 투자 결과와 차이가 날 수 있습니다.</aside>
+        <div class="tip-strip">
+          <div>
+            <strong>복리 계산을 더 잘 쓰는 방법</strong>
+            <p>원금, 기간, 수익률을 하나씩 바꿔 비교하면 어떤 조건이 결과에 더 큰 영향을 주는지 빠르게 확인할 수 있습니다.</p>
+          </div>
+          <button class="button secondary" type="button" data-modal-target="compoundTip">Tip 보기</button>
+        </div>
+        <dialog class="tip-modal" id="compoundTip" aria-labelledby="compoundTipTitle">
+          <article class="tip-modal-inner">
+            <button class="modal-close" type="button" data-modal-close aria-label="닫기">×</button>
+            <h2 id="compoundTipTitle">복리 계산기를 사용할 때 알아둘 점</h2>
+            <p>복리 계산은 투자 원금에서 발생한 수익이 다시 투자되어 다음 기간의 계산 기준에 포함된다고 가정하는 방식입니다. 장기 투자 계획을 세울 때 복리 계산을 활용하면 매월 적립하는 금액, 투자 기간, 예상 수익률의 차이가 최종 자산에 어떤 영향을 줄 수 있는지 비교하기 쉽습니다. 다만 계산식이 단순할수록 실제 투자 환경과는 차이가 있습니다. 실제 투자에서는 가격 변동이 매월 일정하지 않고, 손실이 발생할 수 있으며, 세금과 수수료도 상품과 계좌 종류에 따라 달라질 수 있습니다.</p>
+            <p>이 계산기는 사용자가 입력한 예상 연 수익률을 월 단위 수익률로 환산해 매월 적립금이 추가되는 형태로 계산합니다. 예를 들어 연 수익률 5%를 입력했다고 해서 매년 5%가 계속 발생한다는 뜻은 아닙니다. 입력한 수익률은 시나리오를 비교하기 위한 임의의 가정입니다. 따라서 낙관적인 수익률 하나만 넣기보다는 낮은 수익률, 보통 수준의 수익률, 더 보수적인 수익률을 각각 입력해 결과 범위를 확인하는 편이 계획 검토에 도움이 됩니다.</p>
+            <h3>원금과 수익금을 분리해서 보는 이유</h3>
+            <p>최종 예상 자산만 보면 투자 성과가 크게 느껴질 수 있지만, 그 안에는 사용자가 직접 넣은 원금이 포함되어 있습니다. 총 투자 원금과 예상 수익금을 함께 확인하면 자산 증가가 저축 규모에서 비롯된 것인지, 복리 효과에서 비롯된 것인지 더 명확하게 볼 수 있습니다. 특히 투자 기간이 짧을 때는 월 적립금의 영향이 크고, 기간이 길어질수록 수익률 가정의 영향이 커질 수 있습니다.</p>
+            <h3>주의해야 할 한계</h3>
+            <p>이 사이트는 특정 종목이나 금융상품을 추천하지 않으며 실시간 주가, 실제 배당률, 시장 전망을 반영하지 않습니다. 계산 결과는 투자 판단을 대신하지 않습니다. 투자 여부를 결정하기 전에는 본인의 재무 상황, 투자 목적, 위험 감수 수준, 현금흐름, 비상자금, 세금 조건을 종합적으로 검토해야 합니다. 필요한 경우 공인된 전문가의 조언을 받는 것이 좋습니다.</p>
+            <h3>입력값을 바꿔 비교하는 방법</h3>
+            <p>복리 계산기는 한 번의 결과보다 여러 조건을 비교할 때 더 유용합니다. 월 적립금을 조금 늘렸을 때와 투자 기간을 더 길게 잡았을 때의 차이를 나란히 확인하면 어떤 요소가 계획에 더 큰 영향을 주는지 파악할 수 있습니다. 예상 수익률은 높게 잡을수록 결과가 크게 달라지므로, 현실적인 계획을 위해서는 낮은 수익률 가정도 함께 확인하는 것이 좋습니다. 계산 결과가 마음에 들지 않는다고 해서 무리하게 위험을 키우기보다 저축률, 기간, 지출 구조처럼 스스로 조정 가능한 항목을 먼저 검토하는 방식이 더 신중합니다.</p>
+          </article>
+        </dialog>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><div><strong>투자 계산 도구</strong><p class="footer-note">모든 계산은 참고용 예시입니다. 실시간 주가, 배당률, 종목 추천을 제공하지 않습니다.</p></div><nav class="footer-links" aria-label="하단 메뉴"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><a href="/contact">Contact</a></nav></div></footer>
+</body>
+</html>

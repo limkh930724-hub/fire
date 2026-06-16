@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320" role="img" aria-labelledby="title desc">
+  <title id="title">FIRE 목표 자금 일러스트</title>
+  <desc id="desc">목표 은퇴자금 선을 향해 자산 그래프가 상승하는 모습을 나타냅니다.</desc>
+  <rect width="520" height="320" rx="18" fill="#f6f8fb"/>
+  <rect x="42" y="40" width="436" height="238" rx="14" fill="#ffffff" stroke="#d9e0ea"/>
+  <path d="M80 96H440" stroke="#e8c98f" stroke-width="4" stroke-dasharray="10 10"/>
+  <text x="326" y="84" fill="#8a4b00" font-family="Arial, sans-serif" font-size="15" font-weight="700">목표 은퇴자금</text>
+  <path d="M82 236C130 228 170 218 210 196C252 173 276 148 312 130C352 110 386 102 438 96" fill="none" stroke="#176b5b" stroke-width="8" stroke-linecap="round"/>
+  <path d="M82 236C130 228 170 218 210 196C252 173 276 148 312 130C352 110 386 102 438 96L438 238H82Z" fill="#176b5b" opacity="0.12"/>
+  <circle cx="82" cy="236" r="8" fill="#176b5b"/>
+  <circle cx="210" cy="196" r="8" fill="#176b5b"/>
+  <circle cx="312" cy="130" r="8" fill="#176b5b"/>
+  <circle cx="438" cy="96" r="8" fill="#176b5b"/>
+  <rect x="72" y="66" width="122" height="54" rx="10" fill="#eef8f5" stroke="#cfe4df"/>
+  <text x="90" y="89" fill="#5a6475" font-family="Arial, sans-serif" font-size="13">인출률</text>
+  <text x="90" y="109" fill="#0f4f43" font-family="Arial, sans-serif" font-size="19" font-weight="700">4% 기준</text>
+  <text x="72" y="282" fill="#5a6475" font-family="Arial, sans-serif" font-size="16">생활비와 인출률 직접 입력</text>
+</svg>

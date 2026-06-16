@@ -1,0 +1,90 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIRE 은퇴 계산기 | 목표 은퇴자금과 예상 기간 계산</title>
+  <meta name="description" content="현재 자산, 월 투자금, 예상 연 수익률, 목표 월 생활비, 인출률을 입력해 FIRE 목표 은퇴자금과 예상 기간을 계산합니다.">
+  <link rel="canonical" href="https://example.com/fire-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FIRE 은퇴 계산기 | 목표 은퇴자금과 예상 기간 계산">
+  <meta property="og:description" content="사용자가 직접 입력한 가정으로 은퇴 목표 자금과 도달 예상 기간을 계산합니다.">
+  <meta property="og:url" content="https://example.com/fire-calculator">
+  <meta property="og:site_name" content="투자 계산 도구">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="/assets/js/calculator.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"FIRE 은퇴 계산기","url":"https://example.com/fire-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"현재 자산, 월 투자금, 예상 수익률, 목표 생활비, 인출률을 기준으로 은퇴 목표 자금과 예상 기간을 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"FIRE 은퇴 계산기","item":"https://example.com/fire-calculator"}]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header"><div class="nav-wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">₩</span><span>투자 계산 도구</span></a><nav class="nav-links" aria-label="주요 메뉴"><a class="nav-primary" href="/">복리 계산기</a><a class="nav-primary" href="/fire-calculator" aria-current="page">FIRE 계산기</a><details class="nav-more"><summary>더보기</summary><div class="nav-menu"><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><a href="/contact">Contact</a></div></details></nav></div></header>
+  <main id="main">
+    <section class="page-title visual-title"><div class="container page-title-inner"><div><nav class="breadcrumbs" aria-label="현재 위치"><ol><li><a href="/">복리 계산기</a></li><li>FIRE 은퇴 계산기</li></ol></nav><h1>FIRE 은퇴 계산기</h1><p class="lead">목표 월 생활비와 인출률을 기준으로 필요한 은퇴자금과 도달 예상 기간을 계산합니다.</p><a class="button secondary title-action" href="/">복리 계산기로 이동</a></div><img class="page-visual" src="/assets/img/fire-target.svg" alt="FIRE 목표 은퇴자금 도달 그래프 예시"></div></section>
+    <section class="section">
+      <div class="container tool-grid">
+        <section class="tool-panel" aria-labelledby="fire-input-title">
+          <h2 id="fire-input-title">입력값</h2>
+          <form id="fireForm" class="calculator-form">
+            <div class="field"><label for="currentAssets">현재 자산</label><input id="currentAssets" class="money-input" type="text" value="50,000,000" inputmode="numeric" autocomplete="off" data-korean-target="currentAssetsText"><output class="amount-help" id="currentAssetsText" for="currentAssets">5,000만원</output></div>
+            <div class="field"><label for="monthlyInvestment">월 투자금</label><input id="monthlyInvestment" class="money-input" type="text" value="1,000,000" inputmode="numeric" autocomplete="off" data-korean-target="monthlyInvestmentText"><output class="amount-help" id="monthlyInvestmentText" for="monthlyInvestment">100만원</output></div>
+            <div class="field"><label for="fireAnnualReturn">예상 연 수익률(%)</label><input id="fireAnnualReturn" type="number" min="-99" max="100" step="0.1" value="5" inputmode="decimal"><small>사용자가 직접 입력하는 가정값이며 약속된 수익률이 아닙니다.</small></div>
+            <div class="field"><label for="monthlyExpense">목표 월 생활비</label><input id="monthlyExpense" class="money-input" type="text" value="3,000,000" inputmode="numeric" autocomplete="off" data-korean-target="monthlyExpenseText"><output class="amount-help" id="monthlyExpenseText" for="monthlyExpense">300만원</output></div>
+            <div class="field"><label for="withdrawalRate">인출률(%)</label><input id="withdrawalRate" type="number" min="0.1" max="20" step="0.1" value="4" inputmode="decimal"><small>기본값은 4%이며 개인 상황에 따라 달라질 수 있습니다.</small></div>
+            <button class="button" type="submit">계산하기</button>
+          </form>
+        </section>
+        <section class="tool-panel result-panel" id="fireResultPanel" aria-labelledby="fire-result-title" aria-live="polite">
+          <div class="panel-heading">
+            <div>
+              <h2 id="fire-result-title">은퇴 목표 그래프</h2>
+              <p id="fireAssumption">입력값을 확인한 뒤 계산하기를 누르면 결과가 업데이트됩니다.</p>
+            </div>
+            <button class="tip-button" type="button" data-modal-target="fireTip">Tip</button>
+          </div>
+          <div class="result-summary">
+            <div class="metric"><span>목표 은퇴자금</span><strong id="fireTarget">-</strong></div>
+            <div class="metric"><span>은퇴까지 예상 기간</span><strong id="fireYears">-</strong></div>
+            <div class="metric"><span>누적 원금</span><strong id="firePrincipal">-</strong></div>
+            <div class="metric"><span>원금 대비 수익금</span><strong id="fireProfit">-</strong></div>
+          </div>
+          <div class="notice"><strong>주의:</strong> 예상 결과이며 실제 수익률과 다를 수 있습니다. 생활비, 물가, 세금, 투자 손실 가능성은 계산에 단순 반영되지 않습니다.</div>
+          <div class="chart-wrap"><canvas id="fireChart" aria-label="연도별 예상 자산과 목표 은퇴자금 그래프" role="img"></canvas></div>
+        </section>
+      </div>
+      <div class="container">
+        <div class="table-wrap result-panel" id="fireTable" aria-label="연도별 예상 자산 표" hidden></div>
+        <aside class="ad-slot result-panel" id="fireGuide" aria-label="계산 안내" hidden>계산 결과는 입력값에 따른 참고용 예시입니다. 실제 은퇴 준비 과정과 차이가 날 수 있습니다.</aside>
+        <div class="tip-strip">
+          <div>
+            <strong>FIRE 목표를 더 현실적으로 보는 방법</strong>
+            <p>생활비와 인출률을 함께 조정해 목표 금액의 범위를 확인하면 단일 숫자보다 계획을 더 현실적으로 볼 수 있습니다.</p>
+          </div>
+          <button class="button secondary" type="button" data-modal-target="fireTip">Tip 보기</button>
+        </div>
+        <dialog class="tip-modal" id="fireTip" aria-labelledby="fireTipTitle">
+          <article class="tip-modal-inner">
+            <button class="modal-close" type="button" data-modal-close aria-label="닫기">×</button>
+            <h2 id="fireTipTitle">FIRE 계산기를 사용할 때 알아둘 점</h2>
+          <p>FIRE는 경제적 독립과 조기 은퇴를 뜻하는 표현으로 널리 사용되지만, 실제 계획은 단순한 숫자보다 훨씬 복잡합니다. 이 계산기는 목표 월 생활비를 12개월로 환산하고 사용자가 입력한 인출률로 나누어 목표 은퇴자금을 계산합니다. 예를 들어 월 생활비가 300만원이고 인출률을 4%로 입력하면 연 생활비 3600만원을 0.04로 나누어 약 9억원을 목표 금액으로 표시합니다. 이 방식은 계획을 빠르게 가늠하기 위한 단순 모델입니다.</p>
+          <p>은퇴까지 걸리는 예상 기간은 현재 자산, 월 투자금, 예상 연 수익률을 바탕으로 월별 복리 계산을 반복해 산출합니다. 하지만 실제 투자 수익률은 매월 일정하지 않고, 큰 하락장이 발생하면 목표 달성 기간이 길어질 수 있습니다. 또한 생활비는 물가 상승, 가족 구성, 주거비, 의료비, 세금, 보험료, 예상치 못한 지출에 따라 달라집니다. 따라서 계산 결과를 하나의 정답으로 받아들이기보다 여러 가정을 비교하는 기준점으로 보는 것이 적절합니다.</p>
+          <h3>인출률 기본값 4%의 의미</h3>
+          <p>4% 인출률은 은퇴자금 규모를 추정할 때 자주 언급되는 기준이지만 모든 사람에게 동일하게 적용되는 규칙은 아닙니다. 은퇴 기간이 길수록, 투자 변동성이 클수록, 물가 상승이 높을수록 더 보수적인 인출률을 검토할 필요가 있습니다. 반대로 은퇴 후에도 일부 소득이 있거나 지출이 유연하다면 다른 가정을 세울 수도 있습니다. 중요한 것은 본인의 현금흐름과 위험 감수 수준을 함께 살피는 것입니다.</p>
+          <h3>투자 판단과 분리해서 활용하기</h3>
+          <p>이 사이트는 특정 종목, 펀드, ETF, 예금, 배당 상품을 추천하지 않습니다. 실시간 주가나 실제 배당률을 가져오지 않으며, 입력한 수익률은 사용자의 가정일 뿐입니다. 계산 결과는 참고용이며 투자 판단을 대신하지 않습니다. 은퇴 목표를 세울 때는 비상자금, 부채, 건강보험, 세금, 노후 주거 계획, 가족 부양 책임을 함께 고려해야 합니다.</p>
+          <h3>목표 생활비를 점검하는 방법</h3>
+          <p>목표 월 생활비는 현재 지출을 그대로 입력하기보다 은퇴 후 달라질 항목을 나누어 살펴보는 것이 좋습니다. 주거비가 줄어들 수 있는지, 의료비와 보험료가 늘어날 수 있는지, 여행이나 취미처럼 선택적인 지출을 얼마나 둘 것인지에 따라 필요한 자금은 달라집니다. 또한 인플레이션을 별도로 반영하지 않은 계산 결과는 시간이 지날수록 실제 생활비와 차이가 날 수 있습니다. 따라서 같은 자산 규모라도 생활비를 보수적으로 입력한 경우와 여유 있게 입력한 경우를 비교해 목표 범위를 확인하는 방식이 더 현실적인 검토에 가깝습니다.</p>
+          </article>
+        </dialog>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><div><strong>투자 계산 도구</strong><p class="footer-note">모든 계산은 참고용 예시입니다.</p></div><nav class="footer-links" aria-label="하단 메뉴"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><a href="/contact">Contact</a></nav></div></footer>
+</body>
+</html>

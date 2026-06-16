@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320" role="img" aria-labelledby="title desc">
+  <title id="title">복리 성장 그래프 일러스트</title>
+  <desc id="desc">시간이 지날수록 자산 막대와 선 그래프가 상승하는 모습을 나타냅니다.</desc>
+  <rect width="520" height="320" rx="18" fill="#f6f8fb"/>
+  <rect x="44" y="42" width="432" height="236" rx="14" fill="#ffffff" stroke="#d9e0ea"/>
+  <path d="M86 238H438" stroke="#d9e0ea" stroke-width="2"/>
+  <path d="M86 198H438" stroke="#edf1f6" stroke-width="2"/>
+  <path d="M86 158H438" stroke="#edf1f6" stroke-width="2"/>
+  <path d="M86 118H438" stroke="#edf1f6" stroke-width="2"/>
+  <path d="M86 78H438" stroke="#edf1f6" stroke-width="2"/>
+  <rect x="102" y="190" width="30" height="48" rx="6" fill="#cfe4df"/>
+  <rect x="162" y="174" width="30" height="64" rx="6" fill="#a8d3c8"/>
+  <rect x="222" y="150" width="30" height="88" rx="6" fill="#7ebfaf"/>
+  <rect x="282" y="118" width="30" height="120" rx="6" fill="#4fa28e"/>
+  <rect x="342" y="74" width="30" height="164" rx="6" fill="#176b5b"/>
+  <path d="M112 188C158 178 184 162 232 142C286 120 320 92 360 70C386 56 408 50 434 46" fill="none" stroke="#224b7a" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="112" cy="188" r="7" fill="#224b7a"/>
+  <circle cx="232" cy="142" r="7" fill="#224b7a"/>
+  <circle cx="360" cy="70" r="7" fill="#224b7a"/>
+  <text x="72" y="282" fill="#5a6475" font-family="Arial, sans-serif" font-size="16">사용자 입력 가정 기반 예시</text>
+  <text x="342" y="282" fill="#176b5b" font-family="Arial, sans-serif" font-size="16" font-weight="700">API 미사용</text>
+</svg>
