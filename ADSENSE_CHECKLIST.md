@@ -1,10 +1,10 @@
-# AdSense Submission Checklist
+﻿# AdSense Submission Checklist
 
 배포 및 AdSense 신청 전에 아래 값을 실제 운영 정보로 교체하세요.
 
 ## 반드시 교체할 항목
 
-- `https://example.com`
+- `https://fire-3g0.pages.dev`
   - HTML canonical URL
   - Open Graph URL
   - JSON-LD URL
